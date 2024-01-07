@@ -169,9 +169,9 @@ def startGame():
         elif gameNum == 2:
             buttomList = idiom_game(players)
         elif gameNum == 3:
-            buttomList = playing369(players)
-        elif gameNum == 4:
             buttomList = timeGuessingGame(players)
+        elif gameNum == 4:
+            buttomList = playing369(players)
         elif gameNum == 5:
             buttomList = timeGuessingGame(players)
         deleteHeart(buttomList)
