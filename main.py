@@ -1,5 +1,6 @@
 from Player.Player import Player
 from TimeGuessing import timeGuessingGame
+from idiom import idiom_game
 import random
 
 def showIntro():
@@ -165,7 +166,7 @@ def startGame():
         if gameNum == 1:
             buttomList = timeGuessingGame(players)
         elif gameNum == 2:
-            buttomList = timeGuessingGame(players)
+            buttomList = idiom_game(players)
         elif gameNum == 3:
             buttomList = timeGuessingGame(players)
         elif gameNum == 4:
