@@ -6,6 +6,8 @@ import re
 from Player.Player import Player
 
 #### Utils ####
+
+
 def crawl(url):
     response = requests.get(url)
     soup = bs(response.text, "html.parser")
@@ -19,8 +21,7 @@ def remove_hanja(text):
 #### Game ####
 # 10 페이지 중 하나 선택, 그중에서 한 개의 사자성어 선택
 def choose_idiom():
-    page = random.randint(1, 5)
-    # print(page)
+    page = random.randint(1, 10)
     url = f"https://100.daum.net/book/25/list?sort=vcnt&index=&page={page}"
     soup = crawl(url)
 
@@ -49,7 +50,7 @@ def make_quiz():
             idiom = choose_idiom()
             meaning = get_idiom_meaning(idiom["link"])
             idiom.update({"meaning": meaning})
-            print(f"힌트: {idiom['idiom']}")
+            # print(f"힌트: {idiom['idiom']}")
             return idiom
         except Exception as e:
             print(e)
@@ -89,7 +90,7 @@ def pick_next_player(players, current_player) -> Player:
     return random_element
 
 ### MAIN Game ###
-def process(players) -> Player:
+def idiom_game(players) -> Player:
     print_start()
     flag = True  # 탈락자가 있는지 여부
     player = players[0]
@@ -98,34 +99,20 @@ def process(players) -> Player:
         quiz = make_quiz()
         print(f"🤷 {quiz['meaning']}\n해당 뜻을 가진 사자성어는 무엇일까요? 🤔")
         # 답변을 입력 받음
-        if player == players[0]:  # 플레이어 == 유저
+        if player.isUser:  # 플레이어 == 유저
             answer = input()
         else:  # 플레이어 == 컴퓨터
             # 컴퓨터는 40% 확률로 정답을 맞춘다.
-            if random.randint(1, 100) <= 40:
+            if random.randint(1, 100) <= 50:
                 answer = quiz["idiom"]
             else:
                 answer = "저는 잘 모르겠어요😅"
         # 정답 확인
         print(f"\n🙋 {player.getName()}님이 입력하신 정답은: {answer} 입니다!\n")
         if check_answer(answer, quiz):
-            print("🙆 정답입니다!")
+            print("🙆 정답입니다!\n\n")
             player = pick_next_player(players, player)
-            print(f"\n💬 다음 플레이어 {player.getName()}님은 준비해주세요!\n")
         else:
-            print("🤦 오답입니다!")
-            print(f"이로써 {player.getName()}님은 탈락입니다!")
+            print(f"🤦 오답입니다! 정답은 {quiz['idiom']}입니다! 이로써 {player.getName()}님은 탈락입니다\n\n")
             flag = False
-            return player
-
-
-if __name__ == "__main__":
-    p1 = Player("윤서", 4)
-    p2 = Player("연우", 4)
-    p3 = Player("컴터", 4)
-    p1.setSelect(True)
-    p2.setSelect(False)
-    p3.setSelect(False)
-    players = [p1, p2, p3]
-
-    process(players)
+            return [player]
