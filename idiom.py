@@ -6,8 +6,6 @@ import re
 from Player.Player import Player
 
 #### Utils ####
-
-
 def crawl(url):
     response = requests.get(url)
     soup = bs(response.text, "html.parser")
@@ -102,7 +100,7 @@ def idiom_game(players) -> Player:
         if player.isUser:  # 플레이어 == 유저
             answer = input()
         else:  # 플레이어 == 컴퓨터
-            # 컴퓨터는 40% 확률로 정답을 맞춘다.
+            # 컴퓨터는 50% 확률로 정답을 맞춘다.
             if random.randint(1, 100) <= 50:
                 answer = quiz["idiom"]
             else:
