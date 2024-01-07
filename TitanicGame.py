@@ -67,10 +67,3 @@ def titanicStart(players):
     printStart()
     gameStart(players)
     deleteHeart(players)
-
-p1=Player("우진",4)
-p2=Player("용현",3)
-players=[p1,p2]
-p1.setSelect(True)
-p2.setSelect(False)
-titanicStart(players)

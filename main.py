@@ -1,5 +1,7 @@
 from Player.Player import Player
 from TimeGuessing import timeGuessingGame
+
+from TitanicGame import titanicStart
 import random
 
 def showIntro():
@@ -77,7 +79,9 @@ def showGameList():
 
 def getGame(players):
     gameNum = 0
+    full_num=len(players)
     currentPlayer = players.pop(0)
+    
     if(currentPlayer.isUser == True):
         while(True):
             gameNumStr = input(f"{currentPlayer.getName()}(이)가 좋아하는 랜덤 게임~랜덤 게임~무슨게임?: ")
@@ -157,11 +161,13 @@ def startGame():
         elif gameNum == 4:
             timeGuessingGame(players)
         elif gameNum == 5:
-            timeGuessingGame(players)
+            titanicStart(players)
         if(checkGameOver(players)):
             showGameOver(players)
             break
         currentPlayer = players[0]   
+
+
 
 def main():
     showIntro()
