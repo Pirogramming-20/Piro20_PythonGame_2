@@ -79,12 +79,12 @@ def showPlayerState(players):
     print("~"*100)
 
 def showGameList():
-    print(f"{'오늘의 Alcohol GAME'}:^100")
-    print(f"{'1. 007 게임'}:30")
-    print(f"{'2. 사자성어 게임'}:30")
-    print(f"{'3. 1분 맞추기 게임'}:30")
-    print(f"{'4. 369 게임'}:30")
-    print(f"{'5. 타이타닉 게임'}:30")
+    print(f"{'오늘의 Alcohol GAME':^100}")
+    print(f"{'1. 007 게임':30}")
+    print(f"{'2. 사자성어 게임':30}")
+    print(f"{'3. 1분 맞추기 게임:30'}")
+    print(f"{'4. 369 게임':30}")
+    print(f"{'5. 타이타닉 게임':30}")
     print("~"*100)
 
 def getGame(players):
