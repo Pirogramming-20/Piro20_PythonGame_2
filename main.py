@@ -1,6 +1,7 @@
 from Player.Player import Player
 from TimeGuessing import timeGuessingGame
 from idiom import idiom_game
+from Game369 import playing369
 from TitanicGame import titanicGame
 import random
 
@@ -100,7 +101,7 @@ def getGame(players):
     print("")
     print("-"*100)
 
-    random.shuffle(players)
+    # random.shuffle(players)
     players = players.append(currentPlayer)
 
     return gameNum
@@ -169,7 +170,7 @@ def startGame():
         elif gameNum == 3:
             buttomList = timeGuessingGame(players)
         elif gameNum == 4:
-            buttomList = timeGuessingGame(players)
+            buttomList = playing369(players)
         elif gameNum == 5:
             buttomList = titanicGame(players)
         deleteHeart(buttomList)

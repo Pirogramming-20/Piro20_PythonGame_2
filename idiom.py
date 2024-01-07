@@ -108,7 +108,7 @@ def idiom_game(players) -> Player:
             else:
                 answer = "저는 잘 모르겠어요😅"
         # 정답 확인
-        print(f"\n🙋 {player.getName()}님이 입력하신 정답은: {answer} 입니다!\n")
+        print(f"\n🙋 {player.getName()}님이 입력하신 정답은 '{answer}' 입니다!\n")
         if check_answer(answer, quiz):
             print("🙆 정답입니다!\n\n")
             player = pick_next_player(players, player)

@@ -41,13 +41,14 @@ def ranList(num):
 def playGame(players):
     num = 1
     clap = ["3","6","9"]
+    failedPlayers = []
     while True:
         for player in players :
-            if player.isSelect :
+            if player == players[0] :
                 playerCall = input(f"{player.getName()} : ")
                 if playerCall != rule_365(num):
-                    print(f"아 누가누가 술을 마셔 {player.getName()}(이)가 술을 마셔 원~~샷")
-                    player.subtractHeart()
+                    failedPlayers.append(player)
+                    return failedPlayers
                     break
             else:
                 if num in clap :
@@ -57,8 +58,8 @@ def playGame(players):
                 #playerCall = rule_365(num+1)
                 print(f"{player.getName()} : {playerCall}")
                 if playerCall != rule_365(num):
-                    print(f"아 누가누가 술을 마셔 {player.getName()}(이)가 술을 마셔 원~~샷")
-                    player.subtractHeart()
+                    failedPlayers.append(player)
+                    return failedPlayers
                     break
             num=num+1
         else:
@@ -71,5 +72,7 @@ p1.setSelect(True)
 p2.setSelect(False)
 players = [p1,p2]
 
-gameStart()
-playGame(players)
+def playing369(players) :
+    gameStart()
+    failedPlayers = playGame(players)
+    return failedPlayers
