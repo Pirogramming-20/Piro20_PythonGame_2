@@ -1,7 +1,6 @@
 from Player.Player import Player
 import random
 import time
-import sys
 
 def printSelectPlayer(players):
     for player in players:
@@ -11,6 +10,15 @@ def printSelectPlayer(players):
 def printGameIntro():
     print("*"*100)
     print("시간 맞추기 게임!")
+    print(" _____ _                  _____                     _               _____                      ")
+    print("|_   _(_)                |  __ \                   (_)             |  __ \                     ") 
+    print("  | |  _ _ __ ___   ___  | |  \/_   _  ___  ___ ___ _ _ __   __ _  | |  \/ __ _ _ __ ___   ___ ")
+    print("  | | | | '_ ` _ \ / _ \ | | __| | | |/ _ \/ __/ __| | '_ \ / _` | | | __ / _` | '_ ` _ \ / _ \\")
+    print("  | | | | | | | | |  __/ | |_\ \ |_| |  __/\__ \__ \ | | | | (_| | | |_\ \ (_| | | | | | |  __/")
+    print("  \_/ |_|_| |_| |_|\___|  \____/\__,_|\___||___/___/_|_| |_|\__, |  \____/\__,_|_| |_| |_|\___|")
+    print("                                                             __/ |                             ")
+    print("                                                            |___/                              ")
+    print("")
     print("*"*100)
     print("게임 규칙")
     print("")
@@ -42,7 +50,7 @@ def showResult(difference, players):
             resultList.append([player, randomResult[0]])
             randomResult.pop(0)
     resultList = sorted(resultList, key=lambda x:x[1])
-    
+
     print("*"*100)
     print("결과")
     print("*"*100)
@@ -81,10 +89,3 @@ def timeGuessingGame(players):
     resultList = showResult(difference, players)
     buttomList = deleteHeart(resultList)
     printPlayerState(players, buttomList)
-
-player1 = Player("Yeonu", 5)
-player2 = Player("Jimin", 5)
-players = [player1, player2]
-player1.setSelect(True)
-player2.setSelect(False)
-timeGuessingGame(players)
