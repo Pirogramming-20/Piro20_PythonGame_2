@@ -59,27 +59,14 @@ def showResult(difference, players):
     for result in resultList:
         print(f"{result[0].getName():10} {result[1]:10}")
     return resultList
-
-def deleteHeart(resultList):
+def makeButtom(resultList):
     buttomResult = []
     buttomResult.append(resultList[-1][0])
     buttomTime = resultList[-1][1]
     for target in resultList[:-1]:
         if(target[1] == buttomTime):
             buttomResult.append(target[0])
-    for buttom in buttomResult:
-        print(f"아 누가누가 술을 마셔 {buttom.getName()}(이)가 술을 마셔 원~~샷🍺🍺🍺")
-        buttom.subtractHeart()
     return buttomResult
-
-def printPlayerState(players, buttomList):
-    print("*"*100)
-    for buttom in buttomList:
-        for player in players:
-            if(buttom.getName() == player.getName()):
-                print(f"{player.getName()}은(는) 지금까지 1🍺! 치사량까지 {player.getHeart()}")
-            else:
-                print(f"{player.getName()}은(는) 지금까지 0🍺! 치사량까지 {player.getHeart()}")
 
 def timeGuessingGame(players):
     printSelectPlayer(players)
@@ -88,5 +75,5 @@ def timeGuessingGame(players):
     if(isStart == '1'):
         difference = startGame(players)
     resultList = showResult(difference, players)
-    buttomList = deleteHeart(resultList)
-    printPlayerState(players, buttomList)
+    buttomList = makeButtom(resultList)
+    return buttomList
