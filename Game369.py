@@ -76,5 +76,3 @@ def playing369(players) :
     gameStart()
     failedPlayers = playGame(players)
     return failedPlayers
-
-playing369(players)

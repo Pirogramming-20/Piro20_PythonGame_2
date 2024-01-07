@@ -169,7 +169,7 @@ def startGame():
         elif gameNum == 2:
             buttomList = idiom_game(players)
         elif gameNum == 3:
-            buttomList = timeGuessingGame(players)
+            buttomList = playing369(players)
         elif gameNum == 4:
             buttomList = timeGuessingGame(players)
         elif gameNum == 5:
