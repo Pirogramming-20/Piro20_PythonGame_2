@@ -99,7 +99,7 @@ def getGame(players):
     print("")
     print("-"*100)
 
-    random.shuffle(players)
+    # random.shuffle(players)
     players = players.append(currentPlayer)
 
     return gameNum
