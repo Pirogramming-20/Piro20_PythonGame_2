@@ -30,11 +30,11 @@ def printGameIntro():
 def startGame(players):
     print("게임 시작!")
     
+    difference = 0
     start = time.time()
     for i in range(1,6):
         time.sleep(1)
         print(f"00:0{i}")
-    
     input("1분이 된 것 같을 때 엔터를 눌러주세요.: ")
     end = time.time()
     difference = end - start
@@ -59,6 +59,7 @@ def showResult(difference, players):
     for result in resultList:
         print(f"{result[0].getName():10} {result[1]:10}")
     return resultList
+
 def makeButtom(resultList):
     buttomResult = []
     buttomResult.append(resultList[-1][0])
@@ -71,9 +72,8 @@ def makeButtom(resultList):
 def timeGuessingGame(players):
     printSelectPlayer(players)
     printGameIntro()
-    isStart = input("준비되셨다면 1을 입력해주세요❤️: ")
-    if(isStart == '1'):
-        difference = startGame(players)
+    input("준비되셨다면 아무키나 입력해주세요❤️: ")
+    difference = startGame(players)
     resultList = showResult(difference, players)
     buttomList = makeButtom(resultList)
     return buttomList
