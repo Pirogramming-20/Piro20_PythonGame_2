@@ -83,14 +83,14 @@ def showGameList():
     print(f"{'오늘의 Alcohol GAME':^100}")
     print(f"{'1. 007 게임':30}")
     print(f"{'2. 사자성어 게임':30}")
-    print(f"{'3. 1분 맞추기 게임:30'}")
+    print(f"{'3. 1분 맞추기 게임':30}")
     print(f"{'4. 369 게임':30}")
     print(f"{'5. 타이타닉 게임':30}")
     print("~"*100)
 
 def getGame(players):
     gameNum = 0
-    currentPlayer = players.pop(0)
+    currentPlayer = players[0]
     
     if(currentPlayer.isUser == True):
         while(True):
@@ -106,25 +106,24 @@ def getGame(players):
                 print("잘못된 값을 입력하셨습니다. 1, 2, 3, 4, 5 중 하나를 입력해주세요.")
     else:
         gameNum = random.randint(1, 5)
-
     print(f"{currentPlayer.getName()} 님이 게임을 선택하셨습니다! 😃")
     print("")
     print("-"*100)
-
-    # random.shuffle(players)
-    players = players.append(currentPlayer)
     return gameNum
+
+def shufflePlayers(players):
+    currentPlayer = players.pop(0)
+    players.append(currentPlayer)
 
 def deleteHeart(buttomList):
     for buttom in buttomList:
         print(f"아 누가누가 술을 마셔 {buttom.getName()}(이)가 술을 마셔 원~~샷🍺🍺🍺")
         buttom.subtractHeart()
 
-def printPlayerState(players, buttomList):
+def printPlayerState(players):
     print("*"*100)
-    for buttom in buttomList:
-        for player in players:
-            print(f"{player.getName()}은(는) 지금까지 {player.maxheart-player.heart}🍺! 치사량까지 {player.getHeart()}")
+    for player in players:
+        print(f"{player.getName()}은(는) 지금까지 {player.maxheart-player.heart}🍺! 치사량까지 {player.getHeart()}")
 
 def checkExit():
     runGame = input("술게임 진행중! 다른 사람의 턴입니다. 그만하고 싶으면 \"exit\"를, 계속하고 싶으면 아무키나 입력해 주세요!: ")
@@ -166,6 +165,9 @@ def startGame():
         if(currentPlayer.isUser == True):
             showGameList()
             gameNum = getGame(players)
+            isExit = checkExit()
+            if(isExit):
+                break
         else:
             showGameList()
             gameNum = getGame(players)
@@ -183,10 +185,11 @@ def startGame():
         elif gameNum == 5:
             buttomList = titanicGame(players)
         deleteHeart(buttomList)
-        printPlayerState(players, buttomList)
+        printPlayerState(players)
         if(checkGameOver(players)):
             showGameOver(players)
             break
+        shufflePlayers(players)
         currentPlayer = players[0]   
 
 
