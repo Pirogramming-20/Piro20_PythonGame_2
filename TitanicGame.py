@@ -4,20 +4,18 @@ import random
 def printStart():
     print('-'*50)
     print("""
- .oooooo..o  o8o              oooo         o8o                              ooooooooooooo  o8o      .                          o8o            
-d8P'    `Y8  `"'              `888         `"'                              8'   888   `8  `"'    .o8                          `"'            
-Y88bo.      oooo  ooo. .oo.    888  oooo  oooo  ooo. .oo.    .oooooooo           888      oooo  .o888oo  .oooo.   ooo. .oo.   oooo   .ooooo.  
- `"Y8888o.  `888  `888P"Y88b   888 .8P'   `888  `888P"Y88b  888' `88b            888      `888    888   `P  )88b  `888P"Y88b  `888  d88' `"Y8 
-     `"Y88b  888   888   888   888888.     888   888   888  888   888            888       888    888    .oP"888   888   888   888  888       
-oo     .d8P  888   888   888   888 `88b.   888   888   888  `88bod8P'            888       888    888 . d8(  888   888   888   888  888   .o8 
-8""88888P'  o888o o888o o888o o888o o888o o888o o888o o888o `8oooooo.           o888o     o888o   "888" `Y888""8o o888o o888o o888o `Y8bod8P' 
-                                                            d"     YD                                                                         
-                                                            "Y88888P'                                                                                                                                                                                       
+  ______    _            __        _                    _________  _   _                    _          
+.' ____ \  (_)          [  |  _   (_)                  |  _   _  |(_) / |_                 (_)         
+| (___ \_| __   _ .--.   | | / ]  __   _ .--.   .--./) |_/ | | \_|__ `| |-',--.   _ .--.   __   .---.  
+ _.____`. [  | [ `.-. |  | '' <  [  | [ `.-. | / /'`\;     | |   [  | | | `'_\ : [ `.-. | [  | / /'`\] 
+| \____) | | |  | | | |  | |`\ \  | |  | | | | \ \._//    _| |_   | | | |,// | |, | | | |  | | | \__.  
+ \______.'[___][___||__][__|  \_][___][___||__].',__`    |_____| [___]\__/\'-;__/[___||__][___]'.___.' 
+                                              ( ( __))                                                                                                                                                                                     
     """)
-    print('-'*100)
+    print('-'*50)
     print("맥주잔 안에 담긴 위태위태한 소주잔")
     print("소주는 100cc 이상 넘어갈 수 없습니다!")
-    print("TIP! : 40cc 부터는 항상 조심하세요!")
+    print("***TIP*** : 40cc 부터는 항상 조심하세요!")
     return
 
 def changeNextPlayer(players):
@@ -34,43 +32,55 @@ def changeNextPlayer(players):
 def gameStart(players):
     sinking_point=random.randint(40,100)
     soju_cc=0
+    for i in range(len(players)):
+        if i==len(players)-1:
+            players[i].setSelect(True)
+        else:
+            players[i].setSelect(False)
+    
     while True:
         for player in players:
             if player.isSelected():
-                while True:
+                if player.isUser:
+                    while True:
+                        print('-'*50)
+                        cc=input(f"{player.getName()} 차례입니다. 소주 몇 cc를 부을 건가요? ")
+                        if cc.isdigit() and 0<int(cc) and int(cc)<40:
+                            soju_cc+=int(cc)
+                            print(f"{player.getName()}(이)가 소주를 {int(cc)}만큼 부었습니다!")
+                            print(f"현재 소주잔은 {soju_cc}(이)가 채워졌습니다!")
+                            break
+                        else:
+                            print("소주는 1~39 사이 정수 만큼만 부을 수 있습니다!")
+                else:
                     print('-'*50)
-                    print(f"{player.getName()} 차례입니다. 소주 몇 cc를 부을 건가요? ", end="")
-                    cc=input()
-                    if cc.isdigit() and 0<int(cc) and int(cc)<40:
-                        soju_cc+=int(cc)
-                        break
+                    if(soju_cc>=40):
+                        num=random.randint(1,15)
                     else:
-                        print("소주는 1~39 사이 정수 만큼만 부을 수 있습니다!")
-                break
+                        num=random.randint(10,35)
+                    print(f"{player.getName()} 차례입니다. 소주 몇 cc를 부을 건가요? {num}")
+                    soju_cc+=num
+                    print(f"{player.getName()}(이)가 소주를 {num}만큼 부었습니다!")
+                    print(f"현재 소주잔은 {soju_cc}(이)가 채워졌습니다!")
                 
+            
+            
+            
         if soju_cc>=sinking_point:
-            print(f"당신의 한 방울로 {soju_cc}가 되어 한계인 {sinking_point}를 넘어서 그만...(기우뚱) \n 꼬르ㄹ...\n  ㄹ...")
+            print(f"당신의 한 방울로 {soju_cc}cc가 되어 한계인 {sinking_point}cc를 넘어서서 그만...(기우뚱) \n 꼬르ㄹ...\n  ㄹ...\n")
             break              
-        print(f"현재 소주잔은 {soju_cc}가 채워졌습니다!")
         changeNextPlayer(players)
         
 def deleteHeart(players):
+    sub_people=[]
     for player in players:
         if player.isSelected():    
-            print(f"아 누가누가 술을 마셔 {player.getName()}(이)가 술을 마셔 원~~샷")
-            player.subtractHeart()
-            break
-    changeNextPlayer(players)
+            sub_people.append(player)
+    return sub_people
+    
 
 
-def titanicStart(players):
+def titanicGame(players):
     printStart()
     gameStart(players)
-    deleteHeart(players)
-
-p1=Player("우진",4)
-p2=Player("용현",3)
-players=[p1,p2]
-p1.setSelect(True)
-p2.setSelect(False)
-titanicStart(players)
+    return deleteHeart(players)

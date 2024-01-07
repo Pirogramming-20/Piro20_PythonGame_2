@@ -2,6 +2,7 @@ from Player.Player import Player
 from TimeGuessing import timeGuessingGame
 from idiom import idiom_game
 from Game369 import playing369
+from TitanicGame import titanicGame
 import random
 
 def showIntro():
@@ -90,6 +91,7 @@ def showGameList():
 def getGame(players):
     gameNum = 0
     currentPlayer = players.pop(0)
+    
     if(currentPlayer.isUser == True):
         while(True):
             gameNumStr = input(f"{currentPlayer.getName()}(이)가 좋아하는 랜덤 게임~랜덤 게임~무슨게임?: ")
@@ -122,10 +124,7 @@ def printPlayerState(players, buttomList):
     print("*"*100)
     for buttom in buttomList:
         for player in players:
-            if(buttom.getName() == player.getName()):
-                print(f"{player.getName()}은(는) 지금까지 1🍺! 치사량까지 {player.getHeart()}")
-            else:
-                print(f"{player.getName()}은(는) 지금까지 0🍺! 치사량까지 {player.getHeart()}")
+            print(f"{player.getName()}은(는) 지금까지 {player.maxheart-player.heart}🍺! 치사량까지 {player.getHeart()}")
 
 def checkExit():
     runGame = input("술게임 진행중! 다른 사람의 턴입니다. 그만하고 싶으면 \"exit\"를, 계속하고 싶으면 아무키나 입력해 주세요!: ")
@@ -182,13 +181,15 @@ def startGame():
         elif gameNum == 4:
             buttomList = playing369(players)
         elif gameNum == 5:
-            buttomList = timeGuessingGame(players)
+            buttomList = titanicGame(players)
         deleteHeart(buttomList)
         printPlayerState(players, buttomList)
         if(checkGameOver(players)):
             showGameOver(players)
             break
         currentPlayer = players[0]   
+
+
 
 def main():
     showIntro()
