@@ -6,8 +6,6 @@ import re
 from Player.Player import Player
 
 #### Utils ####
-
-
 def crawl(url):
     response = requests.get(url)
     soup = bs(response.text, "html.parser")
@@ -90,7 +88,7 @@ def pick_next_player(players, current_player) -> Player:
     random_element = random.choice(new_list)
     return random_element
 
-
+### MAIN Game ###
 def process(players) -> Player:
     print_start()
     flag = True  # 탈락자가 있는지 여부

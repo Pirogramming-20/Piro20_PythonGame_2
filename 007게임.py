@@ -1,9 +1,25 @@
-from Player.player import Player
 import time
 import random
+from Player.Player import Player
 
 def play_007_bbang_game(players):
-    z = ['0', '0', '7', '🔫']
+    z = ['''
+  ___  
+ / _ \ 
+( (_) )
+ \___/ 
+       ''', '''
+  ___  
+ / _ \ 
+( (_) )
+ \___/ 
+       ''',
+         '''
+___ 
+(__ )
+ / / 
+(_/
+''', '🔫']
     z_index = 0
 
     def play_turn(player):
@@ -110,6 +126,7 @@ if __name__ == "__main__":
     player3 = Player("다", 3)
     player4 = Player("라", 3)
     
+#     drinks=[player.getHeart() for player in players]
     players=[player1,player2,player3,player4]
     players= [player.getName() for player in players]
     
