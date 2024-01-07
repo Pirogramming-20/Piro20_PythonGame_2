@@ -9,14 +9,14 @@ def printSelectPlayer(players):
             print(f"{player.getName()} 님이 게임을 선택하셨습니다! 😍")
 
 def printGameIntro():
-    print("*"*15)
+    print("*"*100)
     print("시간 맞추기 게임!")
-    print("*"*15)
+    print("*"*100)
     print("게임 규칙")
     print("")
     print("1분을 정확하게 맞춰보세요.")
     print("시작하면 처음 5초를 보여드린 이후 시간이 가려집니다.")
-    print("*"*15)
+    print("*"*100)
 
 def startGame(players):
     print("게임 시작!")
@@ -26,7 +26,7 @@ def startGame(players):
         time.sleep(1)
         print(f"00:0{i}")
     
-    input("1분이 된 것 같을 때 아무 키나 눌러주세요.: ")
+    input("1분이 된 것 같을 때 엔터를 눌러주세요.: ")
     end = time.time()
     difference = end - start
     return difference
@@ -34,35 +34,43 @@ def startGame(players):
 def showResult(difference, players):
     playerResult = round(abs(difference - 60), 4)
     randomResult = [round(random.uniform(0.0, 2.0),4) for i in range(3)]
-    resultDict = {}
+    resultList = []
     for player in players:
         if(player.isSelected()):
-            resultDict[player.getName()] = playerResult
+            resultList.append([player, playerResult])
         else:
-            resultDict[player.getName()] = randomResult[0]
+            resultList.append([player, randomResult[0]])
             randomResult.pop(0)
-    resultDict = sorted(resultDict.items(), key=lambda x:x[1])
-    print("*"*15)
+    resultList = sorted(resultList, key=lambda x:x[1])
+    
+    print("*"*100)
     print("결과")
-    print("*"*15)
+    print("*"*100)
     print(f"{'이름':10} {'결과 (초)':10}")
-    for result in resultDict:
-        print(f"{result[0]:10} {result[1]:10}")
+    for result in resultList:
+        print(f"{result[0].getName():10} {result[1]:10}")
+    return resultList
 
-def deleteHeart(players, resultDict):
+def deleteHeart(resultList):
     buttomResult = []
-    buttomResult.append(resultDict.popitem())
-    while(len(resultDict)!=0):
-        targetResult = resultDict.popitem()
-        if(buttomResult == targetResult):
-            buttomResult.append(targetResult)
+    buttomResult.append(resultList[-1][0])
+    buttomTime = resultList[-1][1]
+    for target in resultList[:-1]:
+        if(target[1] == buttomTime):
+            buttomResult.append(target[0])
     for buttom in buttomResult:
+        print(f"아 누가누가 술을 마셔 {buttom.getName()}(이)가 술을 마셔 원~~샷🍺🍺🍺")
         buttom.subtractHeart()
+    return buttomResult
 
-def printPlayerState(players):
-    print("*"*15)
-    for player in players:
-        print(f"{player.getName()}은(는) 지금까지 {player.getHeart()}개! 치사량까지 {player.getHeart()}")
+def printPlayerState(players, buttomList):
+    print("*"*100)
+    for buttom in buttomList:
+        for player in players:
+            if(buttom.getName() == player.getName()):
+                print(f"{player.getName()}은(는) 지금까지 1🍺! 치사량까지 {player.getHeart()}")
+            else:
+                print(f"{player.getName()}은(는) 지금까지 0🍺! 치사량까지 {player.getHeart()}")
 
 def timeGuessingGame(players):
     printSelectPlayer(players)
@@ -70,9 +78,9 @@ def timeGuessingGame(players):
     isStart = input("준비되셨다면 1을 입력해주세요❤️: ")
     if(isStart == '1'):
         difference = startGame(players)
-    resultDict = showResult(difference, players)
-    deleteHeart(players, resultDict)
-    printPlayerState(players)
+    resultList = showResult(difference, players)
+    buttomList = deleteHeart(resultList)
+    printPlayerState(players, buttomList)
 
 player1 = Player("Yeonu", 5)
 player2 = Player("Jimin", 5)
