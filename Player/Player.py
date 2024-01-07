@@ -4,6 +4,7 @@ class Player:
         self.heart = heart
         self.maxheart = heart
         self.isSelect = False
+        self.isUser = False
 
     def getName(self):
         return self.name

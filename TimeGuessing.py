@@ -45,7 +45,7 @@ def showResult(difference, players):
     randomResult = [round(random.uniform(0.0, 2.0),4) for i in range(3)]
     resultList = []
     for player in players:
-        if(player.isSelected()):
+        if(player.isUser):
             resultList.append([player, playerResult])
         else:
             resultList.append([player, randomResult[0]])
