@@ -1,6 +1,7 @@
 from Player.Player import Player
 from TimeGuessing import timeGuessingGame
 from idiom import idiom_game
+from Game369 import playing369
 import random
 
 def showIntro():
