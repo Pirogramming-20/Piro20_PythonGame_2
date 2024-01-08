@@ -15,7 +15,7 @@ def play007BbangGame(players):
  \___/ 
        ''',
          '''
-___ 
+ ___ 
 (__ )
  / / 
 (_/
@@ -32,7 +32,7 @@ ___
 
     m_player=player_s[0]
     random.shuffle(player_s)
-    print('''                   __                                              __            __ 
+    print('''      __                                              __            __ 
                   /  |                                            /  |          /  |
   _______        _$$ |_           ______          ______         _$$ |_         $$ |
  /       |      / $$   |         /      \        /      \       / $$   |        $$ |
@@ -74,7 +74,7 @@ $$   $$$/       $$   $$$/       /$$/                  /  |
                 else:
                     print("잘못된 플레이어 이름입니다. 다시 선택해주세요.")
         else:
-            time.sleep(1)  # 잠시 대기
+            time.sleep(1)
             selected_player_index = random.choice([i for i in range(len(player_s)) if i != current_player_index])
             print(f'{current_player}님이 {player_s[selected_player_index]}님을 선택했습니다.')
             current_player_index = selected_player_index
@@ -84,9 +84,7 @@ $$   $$$/       $$   $$$/       /$$/                  /  |
             cnt += 1
             p_a=[]
             left_player_index = (current_player_index - 1) % len(player_s)
-            print(left_player_index)
             right_player_index = (current_player_index + 1) % len(player_s)
-            print(right_player_index)
             for i, player in enumerate(player_s):
                 if player == m_player:
                     while True:
@@ -110,18 +108,19 @@ $$   $$$/       $$   $$$/       /$$/                  /  |
                         action = 'quiet'
                         print(f"{player}님이 가만히 있습니다." )
                         p_a.append(action)
-
+                        
             if (
-               p_a[left_player_index] != 'yell'
+                p_a[left_player_index] != 'yell'
                 or p_a[right_player_index] != 'yell'
-                or all(x!='quiet' for x in p_a)
+                or any(p == 'yell' for i, p in enumerate(p_a) if i != left_player_index and i != right_player_index)
             ):
+
                 print(f"{m_player}의 패배")
                 for i in players:
                     if i.getName()==m_player:
                         loser.append(i)
                 break
-            if cnt==4:
+            if cnt==3:
                 
                 print(f'{m_player}의 승리')
                 for i in players:
@@ -141,6 +140,4 @@ $$   $$$/       $$   $$$/       /$$/                  /  |
 if __name__ == "__main__":
 
 
-    
-    # 게임 실행
     play_007_bbang_game(players)
