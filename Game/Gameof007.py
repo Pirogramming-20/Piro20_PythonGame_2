@@ -79,7 +79,7 @@ $$   $$$/       $$   $$$/       /$$/                  /  |
         else:
             time.sleep(1)
             selected_player_index = random.choice([i for i in range(len(player_s)) if i != current_player_index])
-            print(f'{current_player}님이 {player_s[selected_player_index]}님을 선택했습니다.')
+            print(f'{current_player}님이 {player_s[selected_player_index]}님을 선택했습니다.\n')
             current_player_index = selected_player_index
         
         # 빵이 나왔을 때 각 플레이어가 자기가 가만히 있을지, 아니면 으악을 할지를 랜덤하게 선택
@@ -118,14 +118,14 @@ $$   $$$/       $$   $$$/       /$$/                  /  |
                 or any(p == 'yell' for i, p in enumerate(p_a) if i != left_player_index and i != right_player_index)
             ):
 
-                print(f"{m_player}의 패배")
+                print(f"{m_player}의 패배\n")
                 for i in players:
                     if i.getName()==m_player:
                         loser.append(i)
                 break
             if cnt==3:
                 
-                print(f'{m_player}의 승리')
+                print(f'{m_player}의 승리\n')
                 for i in players:
                     if i.getName()!=m_player:
                         loser.append(i)
@@ -134,13 +134,3 @@ $$   $$$/       $$   $$$/       /$$/                  /  |
 
     return loser
  
-        
-                
-                
-                                    
-            
-            
-if __name__ == "__main__":
-
-
-    play_007_bbang_game(players)

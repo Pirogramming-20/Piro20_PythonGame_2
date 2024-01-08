@@ -28,6 +28,55 @@ def showOutro():
     print(f"{'다음에 술마시면 또 불러주세요~ 안녕!':^100}")
     print("~"*100)
 
+def main():
+    showIntro()
+    while(True):
+        isStart = input("게임을 진행할까요? (y/n): ")
+        if isStart == 'y':
+            startGame()
+            break
+        elif isStart == 'n':
+            break
+        else:
+            print("잘못된 값을 입력하셨습니다. y 또는 n으로 입력해주세요.")
+    showOutro()
+
+def startGame():
+    isExit = False
+    players = makePlayers()
+    currentPlayer = players[0]
+    gameNum = 0
+    showPlayers(players)
+    showPlayerState(players)
+    while(True):
+        if(currentPlayer.isUser == True):
+            showGameList()
+            gameNum = getGame(players)
+        else:
+            showGameList()
+            gameNum = getGame(players)
+            isExit = checkExit()
+            if(isExit):
+                break
+        if gameNum == 1:
+            buttomList = play007BbangGame(players)
+        elif gameNum == 2:
+            buttomList = idiom_game(players)
+        elif gameNum == 3:
+            buttomList = timeGuessingGame(players)
+        elif gameNum == 4:
+            buttomList = playing369(players)
+        elif gameNum == 5:
+            buttomList = titanicGame(players)
+        deleteHeart(buttomList)
+        printPlayerState(players)
+        if(checkGameOver(players)):
+            showGameOver(players)
+            break
+        shufflePlayers(players)
+        currentPlayer = players[0]   
+    
+
 def makePlayers():
     players = []
     # nameList = ["우진", "윤서", "선민", "연우", "용현"]
@@ -86,7 +135,7 @@ def showPlayerState(players):
     print("~"*100)
 
 def showGameList():
-    print(f"{'오늘의 Alcohol GAME':^100}")
+    print(f"{'🍺오늘의 Alcohol GAME🍺':~^100}")
     print(f"{'1. 007 게임'}")
     print(f"{'2. 사자성어 게임'}")
     print(f"{'3. 1분 맞추기 게임'}")
@@ -158,57 +207,9 @@ o888    88     888      8888o   888   888    88       o888   888o 888    88   88
     print("-"*100)
     for player in players:
         if(player.getHeart()<=0):
-            print(f"{player.getName()}이(가) 전사헸습니다...꿈나라에서는 편히 쉬시길..zzz")
-
-def startGame():
-    isExit = False
-    players = makePlayers()
-    currentPlayer = players[0]
-    gameNum = 0
-    showPlayers(players)
-    showPlayerState(players)
-    while(True):
-        if(currentPlayer.isUser == True):
-            showGameList()
-            gameNum = getGame(players)
-        else:
-            showGameList()
-            gameNum = getGame(players)
-            isExit = checkExit()
-            if(isExit):
-                break
-        if gameNum == 1:
-            buttomList = play007BbangGame(players)
-        elif gameNum == 2:
-            buttomList = idiom_game(players)
-        elif gameNum == 3:
-            buttomList = timeGuessingGame(players)
-        elif gameNum == 4:
-            buttomList = playing369(players)
-        elif gameNum == 5:
-            buttomList = titanicGame(players)
-        deleteHeart(buttomList)
-        printPlayerState(players)
-        if(checkGameOver(players)):
-            showGameOver(players)
-            break
-        shufflePlayers(players)
-        currentPlayer = players[0]   
+            print(f"{player.getName()}이(가) 전사헸습니다...꿈나라에서는 편히 쉬시길..zzz")    
 
 
-
-def main():
-    showIntro()
-    while(True):
-        isStart = input("게임을 진행할까요? (y/n): ")
-        if isStart == 'y':
-            startGame()
-            break
-        elif isStart == 'n':
-            break
-        else:
-            print("잘못된 값을 입력하셨습니다. y 또는 n으로 입력해주세요.")
-    showOutro()
 
 if __name__ == "__main__":
     main()
