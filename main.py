@@ -1,16 +1,30 @@
 from Player.Player import Player
 from TimeGuessing import timeGuessingGame
 from idiom import idiom_game
+from Game369 import playing369
+from TitanicGame import titanicGame
+from Gameof007 import play007BbangGame
 import random
 
 def showIntro():
-    print("*"*100)
-    print("안주 먹을 시간이 없어요 마시면서 배우는 술게임")
-    print("*"*100)
+    print("~"*120)
+    print('''
+    _       _        ____   U  ___ u  _   _     U  ___ u   _            ____      _      __  __  U _____ u 
+U  /"\  u  |"|    U /"___|   \/"_ \/ |'| |'|     \/"_ \/  |"|        U /"___|uU  /"\  uU|' \/ '|u\| ___"|/ 
+ \/ _ \/ U | | u  \| | u     | | | |/| |_| |\    | | | |U | | u      \| |  _ / \/ _ \/ \| |\/| |/ |  _|"   
+ / ___ \  \| |/__  | |/__.-,_| |_| |U|  _  |u.-,_| |_| | \| |/__      | |_| |  / ___ \  | |  | |  | |___   
+/_/   \_\  |_____|  \____|\_)-\___/  |_| |_|  \_)-\___/   |_____|      \____| /_/   \_\ |_|  |_|  |_____|  
+ \\    >>  //  \\  _// \\      \\    //   \\       \\     //  \\       _)(|_   \\    >><<,-,,-.   <<   >>  
+(__)  (__)(_")("_)(__)(__)    (__)  (_") ("_)     (__)   (_")("_)     (__)__) (__)  (__)(./  \.) (__) (__)
+                                                                                                          
+    ''')
+    print("~"*120)
+    print("٩(๑•̀ㅂ•́)و     안주 먹을🍖 시간이 ⏰ 없어요 ❌ 마시면서 배우는 술게임 🍺     ٩(๑•̀ㅂ•́)و".center(100))
+    print("~"*120)
 
 def showOutro():
     print("~"*100)
-    print("다음에 술마시면 또 불러주세요~ 안녕!")
+    print(f"{'다음에 술마시면 또 불러주세요~ 안녕!':^100}")
     print("~"*100)
 
 def makePlayers():
@@ -18,12 +32,12 @@ def makePlayers():
     nameList = ["우진", "윤서", "선민", "연우", "용현"]
 
     playerName = input("오늘 거하게 취해볼 당신의 이름은?: ")
-    print("소주 기준 당신의 주량은?")
-    print("1. 소주 반병 (2잔)")
-    print("2. 소주 반병에서 한병 (4잔)")
-    print("3. 소주 한 벙에서 한병 반 (6장)")
-    print("4. 소주 한병 반에서 두병 (8잔)")
-    print("소주 두병 이상 (10잔)")
+    print(f"{'소주 기준 당신의 주량은?':~^80}")
+    print(f"{'1. 소주 반병 (2잔)':100}")
+    print(f"{'2. 소주 반병에서 한병 (4잔)':100}")
+    print(f"{'3. 소주 한 벙에서 한병 반 (6장)':100}")
+    print(f"{'4. 소주 한병 반에서 두병 (8잔)':100}")
+    print(f"{'5. 소주 두병 이상 (10잔)':100}")
     print("~"*100)
     while(True):
         playerHeart = input("당신의 치사량(주량)은 얼마만큼인가요?(1~5을 선택해주세요): ")
@@ -32,7 +46,7 @@ def makePlayers():
             or playerHeart == '3'
             or playerHeart == '4'
             or playerHeart == '5'):
-            playerUser = Player(playerName, int(playerHeart))
+            playerUser = Player(playerName, int(playerHeart)*2)
             playerUser.isUser = True
             players.append(playerUser)
             break
@@ -52,8 +66,7 @@ def makePlayers():
                 nameList.pop(newNameIdx)
             break
         else:
-            print("잘못된 값을 입력하셨습니다. 1, 2, 3 중 하나를 입력해주세요.")
-    
+            print("잘못된 값을 입력하셨습니다. 1, 2, 3 중 하나를 입력해주세요.")    
     return players
 
 def showPlayers(players):
@@ -68,17 +81,18 @@ def showPlayerState(players):
     print("~"*100)
 
 def showGameList():
-    print("오늘의 Alcohol GAME")
-    print("1. 007 게임")
-    print("2. 사자성어 게임")
-    print("3. 1분 맞추기 게임")
-    print("4. 369 게임")
-    print("5. 타이타닉 게임")
+    print(f"{'오늘의 Alcohol GAME':^100}")
+    print(f"{'1. 007 게임':30}")
+    print(f"{'2. 사자성어 게임':30}")
+    print(f"{'3. 1분 맞추기 게임':30}")
+    print(f"{'4. 369 게임':30}")
+    print(f"{'5. 타이타닉 게임':30}")
     print("~"*100)
 
 def getGame(players):
     gameNum = 0
-    currentPlayer = players.pop(0)
+    currentPlayer = players[0]
+    
     if(currentPlayer.isUser == True):
         while(True):
             gameNumStr = input(f"{currentPlayer.getName()}(이)가 좋아하는 랜덤 게임~랜덤 게임~무슨게임?: ")
@@ -93,29 +107,24 @@ def getGame(players):
                 print("잘못된 값을 입력하셨습니다. 1, 2, 3, 4, 5 중 하나를 입력해주세요.")
     else:
         gameNum = random.randint(1, 5)
-
-    print(f"{currentPlayer.getName()} 님이 게임을 선택하셨습니다!")
+    print(f"{currentPlayer.getName()} 님이 게임을 선택하셨습니다! 😃")
     print("")
     print("-"*100)
-
-    random.shuffle(players)
-    players = players.append(currentPlayer)
-
     return gameNum
+
+def shufflePlayers(players):
+    currentPlayer = players.pop(0)
+    players.append(currentPlayer)
 
 def deleteHeart(buttomList):
     for buttom in buttomList:
         print(f"아 누가누가 술을 마셔 {buttom.getName()}(이)가 술을 마셔 원~~샷🍺🍺🍺")
         buttom.subtractHeart()
 
-def printPlayerState(players, buttomList):
+def printPlayerState(players):
     print("*"*100)
-    for buttom in buttomList:
-        for player in players:
-            if(buttom.getName() == player.getName()):
-                print(f"{player.getName()}은(는) 지금까지 1🍺! 치사량까지 {player.getHeart()}")
-            else:
-                print(f"{player.getName()}은(는) 지금까지 0🍺! 치사량까지 {player.getHeart()}")
+    for player in players:
+        print(f"{player.getName()}은(는) 지금까지 {player.maxheart-player.heart}🍺! 치사량까지 {player.getHeart()}")
 
 def checkExit():
     runGame = input("술게임 진행중! 다른 사람의 턴입니다. 그만하고 싶으면 \"exit\"를, 계속하고 싶으면 아무키나 입력해 주세요!: ")
@@ -157,6 +166,9 @@ def startGame():
         if(currentPlayer.isUser == True):
             showGameList()
             gameNum = getGame(players)
+            isExit = checkExit()
+            if(isExit):
+                break
         else:
             showGameList()
             gameNum = getGame(players)
@@ -164,21 +176,24 @@ def startGame():
             if(isExit):
                 break
         if gameNum == 1:
-            buttomList = timeGuessingGame(players)
+            buttomList = play007BbangGame(players)
         elif gameNum == 2:
             buttomList = idiom_game(players)
         elif gameNum == 3:
             buttomList = timeGuessingGame(players)
         elif gameNum == 4:
-            buttomList = timeGuessingGame(players)
+            buttomList = playing369(players)
         elif gameNum == 5:
-            buttomList = timeGuessingGame(players)
+            buttomList = titanicGame(players)
         deleteHeart(buttomList)
-        printPlayerState(players, buttomList)
+        printPlayerState(players)
         if(checkGameOver(players)):
             showGameOver(players)
             break
+        shufflePlayers(players)
         currentPlayer = players[0]   
+
+
 
 def main():
     showIntro()
