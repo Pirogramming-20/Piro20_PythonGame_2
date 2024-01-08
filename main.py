@@ -1,9 +1,9 @@
-from Player.Player import Player
-from TimeGuessing import timeGuessingGame
-from idiom import idiom_game
-from Game369 import playing369
-from TitanicGame import titanicGame
-from  Gameof007 import play007BbangGame
+from Player import Player
+from Game.TimeGuessing import timeGuessingGame
+from Game.idiom import idiom_game
+from Game.Game369 import playing369
+from Game.TitanicGame import titanicGame
+from Game.Gameof007 import play007BbangGame
 from NameGenerator import nameGenerator
 import random
 

@@ -1,6 +1,6 @@
 import time
 import random
-from Player.Player import Player
+from Player import Player
 
 
 def play007BbangGame(players):

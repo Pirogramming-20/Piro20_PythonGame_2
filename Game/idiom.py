@@ -3,7 +3,7 @@ import random
 import requests
 from bs4 import BeautifulSoup as bs
 import re
-from Player.Player import Player
+from Player import Player
 
 #### Utils ####
 def crawl(url):
