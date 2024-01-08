@@ -32,7 +32,6 @@ def makePlayers():
     players = []
     # nameList = ["우진", "윤서", "선민", "연우", "용현"]
     nameList = nameGenerator()
-    print(nameList)
 
     playerName = input("오늘 거하게 취해볼 당신의 이름은?: ")
     print(f"{'소주 기준 당신의 주량은?':~^80}")
