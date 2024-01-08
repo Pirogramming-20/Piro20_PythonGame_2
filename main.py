@@ -59,8 +59,11 @@ def makePlayers():
             or visitorNum == '2'
             or visitorNum == '3'):
             for _ in range(int(visitorNum)):
-                newNameIdx = random.randint(0, len(nameList)-1)
-                newHeart = random.randint(1, 5)*2
+                while(True):
+                    newNameIdx = random.randint(0, len(nameList)-1)
+                    newHeart = random.randint(1, 5)*2
+                    if(nameList[newNameIdx]!=playerName):
+                        break
                 newPlayer = Player(nameList[newNameIdx], newHeart)
                 players.append(newPlayer)
                 nameList.pop(newNameIdx)
@@ -82,11 +85,11 @@ def showPlayerState(players):
 
 def showGameList():
     print(f"{'오늘의 Alcohol GAME':^100}")
-    print(f"{'1. 007 게임':30}")
-    print(f"{'2. 사자성어 게임':30}")
-    print(f"{'3. 1분 맞추기 게임':30}")
-    print(f"{'4. 369 게임':30}")
-    print(f"{'5. 타이타닉 게임':30}")
+    print(f"{'1. 007 게임':>30}")
+    print(f"{'2. 사자성어 게임':>30}")
+    print(f"{'3. 1분 맞추기 게임':>30}")
+    print(f"{'4. 369 게임':>30}")
+    print(f"{'5. 타이타닉 게임':>30}")
     print("~"*100)
 
 def getGame(players):
@@ -166,9 +169,6 @@ def startGame():
         if(currentPlayer.isUser == True):
             showGameList()
             gameNum = getGame(players)
-            isExit = checkExit()
-            if(isExit):
-                break
         else:
             showGameList()
             gameNum = getGame(players)
