@@ -2,6 +2,7 @@ import time
 import random
 from Player.Player import Player
 
+
 def play007BbangGame(players):
     z = ['''
   ___  
@@ -23,14 +24,16 @@ def play007BbangGame(players):
     z_index = 0
     player_s= [player.getName() for player in players]
     loser = []
-    
     def play_turn(player):
         nonlocal z_index
         print(f"{player}의 턴")
         print(z[z_index])
         z_index = (z_index + 1) % len(z)
-
-    m_player=player_s[0]
+    
+    for i in players:
+        if i.isUser:
+            m_player=i.getName()
+            
     random.shuffle(player_s)
     print('''      __                                              __            __ 
                   /  |                                            /  |          /  |
