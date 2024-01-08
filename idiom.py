@@ -91,7 +91,7 @@ def pick_next_player(players, current_player) -> Player:
 def idiom_game(players) -> Player:
     print_start()
     flag = True  # 탈락자가 있는지 여부
-    player = players[0]
+    player = random.choice(players)
     while flag:
         print(f"💬 현재 플레이어는 {player.getName()}님 입니다!\n")
         quiz = make_quiz()
