@@ -4,6 +4,7 @@ from idiom import idiom_game
 from Game369 import playing369
 from TitanicGame import titanicGame
 from  Gameof007 import play007BbangGame
+from NameGenerator import nameGenerator
 import random
 
 def showIntro():
@@ -29,15 +30,17 @@ def showOutro():
 
 def makePlayers():
     players = []
-    nameList = ["우진", "윤서", "선민", "연우", "용현"]
+    # nameList = ["우진", "윤서", "선민", "연우", "용현"]
+    nameList = nameGenerator()
+    print(nameList)
 
     playerName = input("오늘 거하게 취해볼 당신의 이름은?: ")
     print(f"{'소주 기준 당신의 주량은?':~^80}")
-    print(f"{'1. 소주 반병 (2잔)':100}")
-    print(f"{'2. 소주 반병에서 한병 (4잔)':100}")
-    print(f"{'3. 소주 한 벙에서 한병 반 (6장)':100}")
-    print(f"{'4. 소주 한병 반에서 두병 (8잔)':100}")
-    print(f"{'5. 소주 두병 이상 (10잔)':100}")
+    print(f"{'1. 소주 반병 (2잔)'}")
+    print(f"{'2. 소주 반병에서 한병 (4잔)'}")
+    print(f"{'3. 소주 한 벙에서 한병 반 (6장)'}")
+    print(f"{'4. 소주 한병 반에서 두병 (8잔)'}")
+    print(f"{'5. 소주 두병 이상 (10잔)'}")
     print("~"*100)
     while(True):
         playerHeart = input("당신의 치사량(주량)은 얼마만큼인가요?(1~5을 선택해주세요): ")
@@ -85,11 +88,11 @@ def showPlayerState(players):
 
 def showGameList():
     print(f"{'오늘의 Alcohol GAME':^100}")
-    print(f"{'1. 007 게임':>30}")
-    print(f"{'2. 사자성어 게임':>30}")
-    print(f"{'3. 1분 맞추기 게임':>30}")
-    print(f"{'4. 369 게임':>30}")
-    print(f"{'5. 타이타닉 게임':>30}")
+    print(f"{'1. 007 게임'}")
+    print(f"{'2. 사자성어 게임'}")
+    print(f"{'3. 1분 맞추기 게임'}")
+    print(f"{'4. 369 게임'}")
+    print(f"{'5. 타이타닉 게임'}")
     print("~"*100)
 
 def getGame(players):
