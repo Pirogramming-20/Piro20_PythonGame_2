@@ -1,8 +1,9 @@
 from Player.Player import Player
+import time
 import random
 
 def printStart():
-    print('-'*50)
+    print('-'*100)
     print("""
   ______    _            __        _                    _________  _   _                    _          
 .' ____ \  (_)          [  |  _   (_)                  |  _   _  |(_) / |_                 (_)         
@@ -12,10 +13,10 @@ def printStart():
  \______.'[___][___||__][__|  \_][___][___||__].',__`    |_____| [___]\__/\'-;__/[___||__][___]'.___.' 
                                               ( ( __))                                                                                                                                                                                     
     """)
-    print('-'*50)
-    print("맥주잔 안에 담긴 위태위태한 소주잔")
+    print('-'*100)
+    print("찰랑거리는 맥주잔 속에 담겨진 위태로운 소주잔")
     print("소주는 100cc 이상 넘어갈 수 없습니다!")
-    print("***TIP*** : 40cc 부터는 항상 조심하세요!")
+    print("***TIP*** : 40cc부터는 항상 조심하세요!")
     return
 
 def changeNextPlayer(players):
@@ -33,11 +34,10 @@ def gameStart(players):
     sinking_point=random.randint(40,100)
     soju_cc=0
     for i in range(len(players)):
-        if i==len(players)-1:
+        if i==0:
             players[i].setSelect(True)
         else:
             players[i].setSelect(False)
-    
     while True:
         for player in players:
             if player.isSelected():
@@ -47,7 +47,8 @@ def gameStart(players):
                         cc=input(f"{player.getName()} 차례입니다. 소주 몇 cc를 부을 건가요? ")
                         if cc.isdigit() and 0<int(cc) and int(cc)<40:
                             soju_cc+=int(cc)
-                            print(f"{player.getName()}(이)가 소주를 {int(cc)}만큼 부었습니다!")
+                            print(f"{player.getName()}(이)가 소주를 {int(cc)}만큼 붓습니다..")
+                            time.sleep(1)
                             print(f"현재 소주잔은 {soju_cc}(이)가 채워졌습니다!")
                             break
                         else:
@@ -60,14 +61,12 @@ def gameStart(players):
                         num=random.randint(10,35)
                     print(f"{player.getName()} 차례입니다. 소주 몇 cc를 부을 건가요? {num}")
                     soju_cc+=num
-                    print(f"{player.getName()}(이)가 소주를 {num}만큼 부었습니다!")
+                    print(f"{player.getName()}(이)가 소주를 {num}만큼 붓습니다..")
+                    time.sleep(1)
                     print(f"현재 소주잔은 {soju_cc}(이)가 채워졌습니다!")
-                
-            
-            
             
         if soju_cc>=sinking_point:
-            print(f"당신의 한 방울로 {soju_cc}cc가 되어 한계인 {sinking_point}cc를 넘어서서 그만...(기우뚱) \n 꼬르ㄹ...\n  ㄹ...\n")
+            print(f"당신의 한 방울로 {soju_cc}cc가 되어 한계인 {sinking_point}cc에 도달해서 그만...(기우뚱) \n 꼬르ㄹ...\n  ㄹ...\n")
             break              
         changeNextPlayer(players)
         
