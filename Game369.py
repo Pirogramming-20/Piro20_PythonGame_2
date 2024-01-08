@@ -45,7 +45,7 @@ def playGame(players):
     failedPlayers = []
     while True:
         for player in players :
-            if player == players[0] :
+            if player.isUser :
                 playerCall = input(f"{player.getName()} : ")
                 if playerCall != rule_365(num):
                     failedPlayers.append(player)
