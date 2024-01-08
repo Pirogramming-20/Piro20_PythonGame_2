@@ -33,10 +33,10 @@ def rule_365(num):
 
 def ranList(num):
     digitCount = 1
-    ranList = [num, "짝"]
+    ranList = ["짝","짝","짝",num]
     if digitCount != len(str(num)):
         digitCount = len(str(num))
-        ranList.append("짝"*digitCount)
+        ranList.append(["짝"*digitCount]*3)
     return ranList
 
 def playGame(players):
@@ -50,7 +50,6 @@ def playGame(players):
                 if playerCall != rule_365(num):
                     failedPlayers.append(player)
                     return failedPlayers
-                    break
             else:
                 if num in clap :
                     playerCall = random.choice(ranList(num))
@@ -61,7 +60,6 @@ def playGame(players):
                 if playerCall != rule_365(num):
                     failedPlayers.append(player)
                     return failedPlayers
-                    break
             num=num+1
         else:
             continue
